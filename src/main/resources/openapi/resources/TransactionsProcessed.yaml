@@ -1,0 +1,69 @@
+post:
+  tags:
+    - Transactions
+  operationId: transationsProcessed
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/request/schemas/TransationsProcessedRequest'
+  responses:
+    '200':
+      description: Transactions Balance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/response/schemas/BalanceTransactionsResponse'
+    '204':
+      description: No Content
+    '500':
+      description: Internal Server Error
+
+components:
+  request:
+    schemas:
+      TransationsProcessedRequest:
+        type: object
+        description: Request
+        properties:
+          accountIdentifier:
+            type: string
+            format: uuid
+  response:
+    schemas:
+      BalanceTransactionsResponse:
+        type: object
+        description: Request
+        properties:
+          id:
+            type: string
+            format: uuid
+            description: Identificador único da conta
+          owner:
+            type: string
+            format: uuid
+            description: Identificador do dono da conta
+          balance:
+            type: object
+            properties:
+              amount:
+                type: number
+                format: bigdecimal
+                description: Valor atual da conta
+              currency:
+                type: string
+                pattern: '^[A-Z]{3}$'
+                example: BRL
+                description: Código da moeda (ISO 4217)
+          updated_at:
+            type: string
+            format: date-time
+            description: Data da última atualização (ISO 8601)
+            required:
+              - id
+              - owner
+              - balance
+              - updated_at
+
+

@@ -1,0 +1,32 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: ms-serv-transacoes
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/transacoes
+    username: user
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10         # Máximo de conexões simultâneas
+      minimum-idle: 5               # Mínimo de conexões ociosas
+      idle-timeout: 600000          # Tempo antes de fechar conexões ociosas (ms)
+      connection-timeout: 30000     # Tempo máximo para aguardar conexão (ms)
+      max-lifetime: 1800000         # Vida útil da conexão (ms)
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+

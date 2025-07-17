@@ -1,0 +1,14 @@
+openapi: 3.0.3
+info:
+  title: serv-transacoes
+  description: This API provides user management functionalities.
+  version: 1.0.0
+servers:
+  - url: https://api.ms-serv-transacoes.com/v1
+    description: Main API Server
+  - url: https://staging.api.ms-serv-transacoes.com/v1
+    description: Staging API Server
+
+paths:
+  /transactions/processed:
+    $ref: "./resources/TransactionsProcessed.yaml"
